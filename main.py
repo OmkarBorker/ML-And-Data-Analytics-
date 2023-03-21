@@ -1,21 +1,13 @@
-import matplotlib.pyplot as plt
-import seaborn as sns
+from transformers import pipeline
 
-import keras
-from keras.models import Sequential
-from keras.layers import Dense, Conv2D , MaxPool2D , Flatten , Dropout 
-from keras.preprocessing.image import ImageDataGenerator
-from keras.optimizers import Adam
+# Load the summarization model
+summarizer = pipeline("summarization")
 
-from sklearn.metrics import classification_report,confusion_matrix
+# Define the input text
+text = """I am happy! There is a deep sense of contentment that fills my heart and soul, and it seems as though every moment is illuminated with a bright and joyful light. I feel at peace with myself and the world around me, and everything seems to be aligned in perfect harmony."""
 
-import tensorflow as tf
+# Generate the summary
+summary = summarizer(text, max_length=50, min_length=10, do_sample=False)
 
-import cv2
-import os
-
-import numpy as np
-
-
- 
- 
+# Print the summary
+print(summary[0]['summary_text'])
